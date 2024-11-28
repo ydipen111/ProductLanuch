@@ -16,6 +16,7 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { userLogOut } from "../features/Admin/userSlice";
 
 
 // user profile menu component
@@ -62,7 +63,7 @@ const ProfileMenu = ({ user }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => setIsMenuOpen(false);
-  const menus = user.isAdmin ? userMenuItems : adminMenuItems;
+  const menus = user.isAdmin ? adminMenuItems : userMenuItems;
 
   return (
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -105,8 +106,6 @@ const ProfileMenu = ({ user }) => {
 
                   case "signout":
                     dispatch(userLogOut());
-
-
                     closeMenu();
                 }
 

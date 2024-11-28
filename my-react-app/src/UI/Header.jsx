@@ -6,8 +6,8 @@ import ProfileMenu from "./ProfileMenu";
 
 export function Header() {
   const nav = useNavigate();
-  const user = useSelector((state) => state.userSlice);
-  console.log(user);
+  const { user } = useSelector((state) => state.userSlice);
+  // console.log(user);
 
 
 
@@ -26,7 +26,7 @@ export function Header() {
 
 
 
-        {user ? <ProfileMenu user={user} /> : <Button onClick={() => nav('/login')} size="sm" variant="text">
+        {user ? <ProfileMenu user={user} /> : <Button onClick={() => nav('/login-page')} size="sm" variant="text">
           <span>Log In</span>
         </Button>}
 
