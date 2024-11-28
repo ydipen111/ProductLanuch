@@ -2,8 +2,10 @@ import React from 'react'
 import { Rootlayout } from './UI/Rootlayout'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home } from './UI/Home'
-import { Login } from './features/Admin/Login'
-import { Signup } from './features/Admin/Signup'
+import LoginPage from './features/Admin/LoginPage'
+import Signup from './features/Admin/Signup'
+import { UserRoutes } from './UI/UserRoutes'
+
 
 export default function App() {
   const router = createBrowserRouter([{
@@ -16,13 +18,22 @@ export default function App() {
       },
 
       {
-        path: 'login-page',
-        element: <Login />
-      },
+        element: <UserRoutes />,
+        children: [
 
-      {
-        path: 'signup-page',
-        element: <Signup />
+
+          {
+            path: 'login-page',
+            element: <LoginPage />
+          },
+
+          {
+            path: 'signup-page',
+            element: < Signup />
+          },
+
+        ]
+
       }
     ]
   }])

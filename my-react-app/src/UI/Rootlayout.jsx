@@ -1,11 +1,11 @@
 import React from 'react'
-import Headers from './Headers'
 import { Outlet } from 'react-router-dom'
+import { Header } from './Header'
 
 export const Rootlayout = () => {
   return (
     <div className=''>
-      <Headers />
+      <Header />
       <Outlet />
     </div>
   )

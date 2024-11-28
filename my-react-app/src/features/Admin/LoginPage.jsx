@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Card,
   Input,
@@ -9,24 +11,21 @@ import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { userAdd } from "./userSlice";
-import { useUserSignupMutation } from "./authApi";
+import { useUserLoginMutation } from './authApi';
+import { userAdd } from './userSlice';
 
 
 
-const Signup = () => {
+const LoginPage = () => {
   const nav = useNavigate();
-  const [userAdd, { isLoading }] = useUserSignupMutation();
 
-
-
-
+  const dispatch = useDispatch();
+  const [userLogin, { isLoading }] = useUserLoginMutation();
 
 
   const { handleChange, handleSubmit, values, errors, setFieldValue, touched } = useFormik({
     initialValues: {
       email: '',
-      fullname: '',
       password: ''
     },
     onSubmit: async (val) => {
@@ -35,9 +34,10 @@ const Signup = () => {
 
 
       try {
-        const response = await userAdd(val).unwrap();
+        const response = await userLogin(val).unwrap();
+        dispatch(userAdd(response));
         toast.success(response?.message);
-        nav('/');
+        nav(-1);
       } catch (err) {
         console.log(err);
         toast.error(err.data?.message);
@@ -52,7 +52,7 @@ const Signup = () => {
   return (
     <Card color="transparent" shadow={false} className="p-4 mx-auto max-w-[350px]">
       <Typography variant="h4" color="blue-gray">
-        Sign Up
+        Login in your email id
       </Typography>
       <Typography color="gray" className="mt-1 font-normal">
         Nice to meet you! Enter your details to register.
@@ -61,15 +61,7 @@ const Signup = () => {
         onSubmit={handleSubmit}
         className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="space-y-6">
-          <div>
 
-            <label htmlFor="">Full name</label>
-            <Input
-              name="fullname"
-              onChange={handleChange}
-              value={values.fullname}
-              label="fullname" />
-          </div>
           <div>
 
             <Input
@@ -79,7 +71,7 @@ const Signup = () => {
               label="Email" />
           </div>
           <div>
-            <label htmlFor="">Password</label>
+
             <Input
               type="password"
               name="password"
@@ -98,7 +90,7 @@ const Signup = () => {
         <Typography color="gray" className="mt-4 text-center font-normal">
           Already have an account?{" "}
           <a href="#" className="font-medium text-gray-900">
-            Sign In
+            Login
           </a>
         </Typography>
       </form>
@@ -107,4 +99,4 @@ const Signup = () => {
 }
 
 
-export default Signup
+export default LoginPage;
