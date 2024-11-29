@@ -100,7 +100,7 @@ const ProfileMenu = ({ user }) => {
                     break;
 
                   case "products":
-                    nav('/product-admin');
+                    nav('/products-admin');
 
                     break;
 

@@ -3,10 +3,17 @@ import authRoutes from './Routes/authRoutes.js'
 import productRoute from './Routes/productRoute.js'
 import mongoose from 'mongoose';
 import cors from 'cors';
+import fileUpload from 'express-fileupload';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.static('Image'));
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 }
+}))
+
+
 const port = "1999";
 
 

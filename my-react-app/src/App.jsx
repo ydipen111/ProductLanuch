@@ -5,6 +5,7 @@ import { Home } from './UI/Home'
 import LoginPage from './features/Admin/LoginPage'
 import Signup from './features/Admin/Signup'
 import { UserRoutes } from './UI/UserRoutes'
+import ProductAdmin from './features/AdminProfile/ProductAdmin'
 
 
 export default function App() {
@@ -15,6 +16,10 @@ export default function App() {
       {
         index: true,
         element: <Home />
+      },
+      {
+        path: 'products-admin',
+        element: <ProductAdmin />
       },
 
       {
